@@ -3,4 +3,4 @@ A Python website that visualises forecasted data as a line plot for temperatures
 
 # Technologies used
 Used Open source weather API along with streamlit to make the website.
-Python libraries plotly, pandas and requests used.
+Python libraries streamlit, plotly and requests used.
