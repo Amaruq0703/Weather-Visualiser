@@ -9,12 +9,38 @@ sliderval = st.slider(label='Forecast Days', min_value=1, max_value=5, key='user
 dropval = st.selectbox(options=('Temperature', 'Sky'), label='Select data to view:')
 st.subheader(f'{dropval} for the next {sliderval} days in {placeval}')
 
-data = get_data(placeval, sliderval, dropval)
+if placeval:
+    filtered_data = get_data(placeval, sliderval)
+
+    try:
+        if dropval =='Temperature':
+            temperatures = [temps['main']['temp'] for temps in filtered_data]
+            temperatures = [temperature-273.15 for temperature in temperatures]
+            date = [dates['dt_txt'] for dates in filtered_data]
+            fig = px.line(x=date, y=temperatures, labels={'x':'Dates', 'y': 'Temperatures'})
+            st.plotly_chart(fig)
+
+        if dropval == 'Sky':
+            skycondi = [sky['weather'][0]['main'] for sky in filtered_data]
+            images = {'Clear': 'images\clear.png', 'Clouds':'images\cloud.png',
+                        'Rain': 'images/rain.png', 'Snow': 'images\snow.png'}
+            imagepaths = [images[sky] for sky in skycondi]
+            date = [dates['dt_txt'] for dates in filtered_data]
+            st.image(imagepaths, width=100, caption= date)
+
+    except KeyError:
+        st.info('Please enter a valid city')
+
+
+        
+        
+        
 
 
 
 
-# fig = px.line(x=dateslist, y=tempslist, labels={'x':'Dates', 'y': 'Temperatures'})
+
+
 
 
 
