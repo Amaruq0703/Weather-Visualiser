@@ -21,8 +21,8 @@ if placeval:
 
         if dropval == 'Sky':
             skycondi = [sky['weather'][0]['main'] for sky in filtered_data]
-            images = {'Clear': 'images\clear.png', 'Clouds':'images\cloud.png',
-                        'Rain': 'images/rain.png', 'Snow': 'images\snow.png'}
+            images = {'Clear': 'https://github.com/Amaruq0703/Weather-Visualiser/blob/main/images/clear.png?raw=true', 'Clouds':'https://github.com/Amaruq0703/Weather-Visualiser/blob/main/images/cloud.png?raw=true',
+                        'Rain': 'https://github.com/Amaruq0703/Weather-Visualiser/blob/main/images/rain.png?raw=true', 'Snow': 'https://github.com/Amaruq0703/Weather-Visualiser/blob/main/images/snow.png?raw=true'}
             imagepaths = [images[sky] for sky in skycondi]
             date = [dates['dt_txt'] for dates in filtered_data]
             st.image(imagepaths, width=100, caption= date)
