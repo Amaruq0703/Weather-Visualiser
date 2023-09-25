@@ -2,6 +2,8 @@ import streamlit as st
 import plotly.express as px
 from backend import get_data
 
+#Making the User Interface
+
 st.header('Weather Forecast for the Next Days')
 placeval = st.text_input(label='Place', key='userplace')
 sliderval = st.slider(label='Forecast Days', min_value=1, max_value=5, key='userdays', help='Select the number of forecasted days')
@@ -11,6 +13,7 @@ st.subheader(f'{dropval} for the next {sliderval} days in {placeval}')
 if placeval:
     filtered_data = get_data(placeval, sliderval)
 
+    # Adding different options for Sky conditions and Temperature
     try:
         if dropval =='Temperature':
             temperatures = [temps['main']['temp'] for temps in filtered_data]
